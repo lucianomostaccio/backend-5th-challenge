@@ -1,5 +1,5 @@
 const express = require("express");
-const ProductManager = require("../managers/ProductManager");
+const ProductManager = require("../services/ProductManager");
 const productManager = new ProductManager();
 const router = express.Router();
 
