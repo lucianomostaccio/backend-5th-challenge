@@ -8,17 +8,17 @@
     {{!-- we use dynamic style to later indicate the style file in views.router for each page --}}
     <link rel="stylesheet" href="/css/globalStyles.css"> 
     <link rel="stylesheet" href="/css/{{style}}"> 
-    <title>Ecommerce</title>
+    <title>{{titulo}}</title>
   </head>
   <body>
     <header>
-      <!-- header-->
+      {{>navbar}} {{!-- navbar partial dynamic import --}}
     </header>
     <main>
       {{{body}}}
     </main>
     <footer>
-      <!-- footer -->
+      {{>footer}} {{!-- footer partial dynamic import --}}
     </footer>
     <script src="/socket.io/socket.io.js"></script>
     <script src="/js/index.js"></script>

@@ -1,12 +1,14 @@
 const express = require("express");
+const router = express.Router();
 const ProductManager = require("../services/ProductManager");
 const productManager = new ProductManager();
-const router = express.Router();
+
 
 router.get("/", async (req, res) => {
   try {
     const products = await productManager.getProducts();
     res.render("home", {
+      titulo: "Products list",
       products,
       style: "home.css", //specific style file for this page
     });
@@ -20,6 +22,7 @@ router.get("/realtimeproducts", async (req, res) => {
   try {
     const products = await productManager.getProducts();
     res.render("realTimeProducts", {
+      titulo: "Real time products list",
       products,
       style: "realTimeProducts.css", //specific style file for this page
     });
