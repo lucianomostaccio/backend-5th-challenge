@@ -8,6 +8,10 @@ a {
   text-decoration: none;
 }
 
+li{
+  list-style: none;
+}
+
 nav {
   background-color: black;
 }
@@ -27,4 +31,22 @@ nav {
 
 .productTitle {
   padding: 0.5rem;
+}
+
+footer {
+  background-color: black;
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+}
+
+#footerList {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+#footerList li {
+  color: white;
 }

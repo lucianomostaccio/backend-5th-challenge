@@ -3,6 +3,7 @@ const router = express.Router();
 const ProductManager = require("../services/ProductManager");
 const productManager = new ProductManager();
 
+const viewsRouter = router;
 
 router.get("/", async (req, res) => {
   try {
@@ -32,4 +33,4 @@ router.get("/realtimeproducts", async (req, res) => {
   }
 });
 
-module.exports = router;
+module.exports = viewsRouter;
