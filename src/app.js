@@ -5,7 +5,8 @@ const handlebars = require("express-handlebars");
 const { Server } = require("socket.io");
 const viewsRouter = require("./routers/views.router.js");
 const apiRouter = require("./routers/api.router.js");
-const onConnection = require("./controllers/socket.controller.js")
+const onConnection = require("./controllers/socket.controller.js");
+const mongoose = require("mongoose");
 
 // initialize server
 const app = express();
@@ -28,8 +29,18 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(express.static(path.join(__dirname, "static"))); //specify static folder
 
+// mongoose
+const connectToDatabase = async () => {
+  try {
+    await mongoose.connect('mongodb+srv://lucianomostaccio:nose123@lucianobackendcourse.i2t7sxi.mongodb.net/?retryWrites=true&w=majority');
+    console.log('Conexión exitosa a MongoDB');
+  } catch (error) {
+    console.error('Error de conexión a MongoDB:', error);
+  }
+};
+
+connectToDatabase();
+
 // routers
 app.use("/", viewsRouter);
 app.use("/api/", apiRouter)
-
-

@@ -1,10 +1,10 @@
 // @ts-nocheck
-const ProductManager = require("../services/ProductManager.js");
+const ProductManager = require("../dao/services/fs/ProductManager.js");
 const productManager = new ProductManager();
 
 function onConnection(webSocketServer) {
   return async function (socket) {
-    console.log(`New client connected: ${socket.id}`)
+    console.log(`New client connected: ${socket.id}`);
     // socket.broadcast.emit("newUser", socket.handshake.auth.usuario);
 
     // Listen to client's events
