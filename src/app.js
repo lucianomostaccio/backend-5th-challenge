@@ -3,9 +3,10 @@ const express = require("express");
 const path = require("path");
 const handlebars = require("express-handlebars");
 const { Server } = require("socket.io");
-const viewsRouter = require("./routers/views.router.js");
-const apiRouter = require("./routers/api.router.js");
+const viewsRouter = require("./routes/views.router.js");
+const apiRouter = require("./routes/api.router.js");
 const onConnection = require("./controllers/socket.controller.js");
+// const inyectSocketServer = require("./controllers/socket.controller.js");
 const mongoose = require("mongoose");
 require('dotenv').config();
 
@@ -29,6 +30,7 @@ app.set("view engine", "handlebars");
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(express.static(path.join(__dirname, "static"))); //specify static folder
+// app.use(inyectSocketServer(websocketServer))
 
 // mongoose
 const connectToDatabase = async () => {

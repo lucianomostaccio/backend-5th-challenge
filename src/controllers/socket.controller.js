@@ -1,5 +1,6 @@
 // @ts-nocheck
 const ProductManager = require("../dao/services/fs/ProductManager.js");
+const MessagesManager = require("../dao/services/mongodb/MessagesManager.js");
 const productManager = new ProductManager();
 
 function onConnection(webSocketServer) {
