@@ -1,6 +1,7 @@
 const express = require("express");
 const router = express.Router();
 const messagesModel = require("../dao/models/messagesModel.js");
+const uploader = require("../middlewares/multer.js");
 
 
 router.get("/", async (req, res) => {
@@ -11,5 +12,17 @@ router.get("/", async (req, res) => {
     console.log("cannot get messages with mongoose: " + error);
   }
 });
+
+// let users= []
+// router.post("/upload", uploader.single('file'),(req,res)=>{
+//   if(!req.file){
+//     return res.status(400).send({status:"error",error:"image uploading failed"})
+//   }
+//   console.log(req.file);
+//   let user = req.body
+//   user.profile = req.file.path;
+//   users.push(user);
+//   res.send({status:"success",message:"user created"})
+// })
 
 module.exports = router;

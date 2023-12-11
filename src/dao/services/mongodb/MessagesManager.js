@@ -1,10 +1,9 @@
-const Message = require("../../models/messagesModel.js");
+const message = require("../../models/messagesModel.js");
 
-class MessagesManagerMongo {
-
+class MessagesManager {
   async create(data) {
     try {
-      let newMessage = new Message(data);
+      let newMessage = new message(data);
       await newMessage.save();
       return newMessage;
     } catch (error) {
@@ -14,7 +13,7 @@ class MessagesManagerMongo {
 
   async findAll() {
     try {
-      let messages = await Message.find();
+      let messages = await message.find();
       return messages;
     } catch (error) {
       throw new Error(`Error obtaining all messages: ${error.message}`);
@@ -22,6 +21,6 @@ class MessagesManagerMongo {
   }
 }
 
-const messagesManagerDB = new MessagesManagerMongo();
+const messagesManager = new MessagesManager();
 
-module.exports = { MessagesManagerMongo, messagesManagerDB };
+module.exports = { MessagesManager, messagesManager };
