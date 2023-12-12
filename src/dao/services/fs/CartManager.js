@@ -47,16 +47,16 @@ class CartManager {
     //   );
     //   return;
     // }
-    this.carts.push(newCart); //pushearlo
+    this.carts.push(newCart); 
     this.nextId++; //autogenerar el id sumando 1
     await this.saveCartsToFile(); //ejecutar la función para escribir el nuevo cart en el json
     console.log("Cart agregado:", newCart);
   }
 
-  //traer todos los carts (no fue pedido)
-  //   getCarts() {
-  //     return this.carts;
-  //   }
+  //traer todos los carts 
+    getCarts() {
+      return this.carts;
+    }
 
   //traer cart por id
   getCartById(id) {
