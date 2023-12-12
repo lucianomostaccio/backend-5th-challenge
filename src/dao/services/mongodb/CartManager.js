@@ -40,7 +40,6 @@ class CartManager {
     }
   }
 
-
   // Obtener todos los carts
   async getCarts() {
     try {
@@ -50,7 +49,6 @@ class CartManager {
       return [];
     }
   }
-
 
   // Obtener cart por ID
   async getCartById(id) {
@@ -66,12 +64,12 @@ class CartManager {
   async addProductToCart(cartId, productId) {
     try {
       const cartToUpdate = await CartModel.findById(cartId);
-  
+
       if (cartToUpdate) {
         const productIndex = cartToUpdate.products.findIndex(
           (product) => product.id === productId
         );
-  
+
         if (productIndex !== -1) {
           // Si el producto ya existe en el carrito, se incrementa la cantidad
           cartToUpdate.products[productIndex].quantity += 1;
@@ -82,7 +80,7 @@ class CartManager {
             quantity: 1,
           });
         }
-  
+
         await cartToUpdate.save(); // Actualizar el cart en la base de datos con los cambios
         console.log("Producto agregado al carrito:", cartToUpdate);
       } else {

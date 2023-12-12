@@ -1,6 +1,6 @@
 const express = require("express");
 const router = express.Router();
-const CartManager = require("../dao/services/fs/CartManager");
+const CartManager = require("../dao/services/mongodb/CartManager");
 
 const cartManager = new CartManager();
 
@@ -10,18 +10,17 @@ const cartManager = new CartManager();
 router.post("/", async (req, res) => {
   try {
     await cartManager.addCart();
-    res.status(201).json({ message: "cart added succesfully" });
+    res.status(201).json({ message: "Cart added successfully" });
   } catch (error) {
-    console.error("error adding cart", error);
+    console.error("Error adding cart", error);
     res.status(500).json({ error: "Internal server error" });
   }
 });
 
 // Obtener un cart por ID
-router.get("/:pid", async (req, res) => {
+router.get("/:cid", async (req, res) => {
   try {
-    const cartId = Number(req.params.pid);
-    console.log("cart id:", cartId);
+    const cartId = req.params.cid;
     const cart = await cartManager.getCartById(cartId);
 
     if (cart) {
@@ -38,11 +37,8 @@ router.get("/:pid", async (req, res) => {
 // Agregar a un cart específico un producto
 router.post("/:cid/product/:pid", async (req, res) => {
   try {
-    const cartId = Number(req.params.cid);
-    const prodId = Number(req.params.pid);
-    console.log(
-      `You are looking into cart with id:${cartId}, the product with id:${prodId}`
-    );
+    const cartId = req.params.cid;
+    const prodId = req.params.pid;
 
     await cartManager.addProductToCart(cartId, prodId);
     res.json({

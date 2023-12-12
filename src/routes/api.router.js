@@ -10,5 +10,4 @@ apiRouter.use("/products", productRouter);
 apiRouter.use("/carts", cartRouter);
 apiRouter.use("/chat", chatRouter);
 
-
 module.exports = apiRouter;

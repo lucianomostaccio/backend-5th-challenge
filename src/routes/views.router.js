@@ -2,7 +2,7 @@ const express = require("express");
 const router = express.Router();
 const ProductManager = require("../dao/services/fs/ProductManager");
 const productManager = new ProductManager();
-const MessagesManager = require("../dao/services/mongodb/MessagesManager");
+const messagesManager = require("../dao/services/mongodb/MessagesManager");
 
 const viewsRouter = router;
 
@@ -36,10 +36,10 @@ router.get("/realtimeproducts", async (req, res) => {
 
 router.get("/chat", async (req, res) => {
   try {
-    // const messages = await messagesManager.findAll();
+    const messages = await messagesManager.findAll();
     res.render("chat", {
       titulo: "Chat",
-      // messages,
+      messages,
       style: "chat.css", // Nombre del archivo de estilo específico para esta página
     });
   } catch (error) {

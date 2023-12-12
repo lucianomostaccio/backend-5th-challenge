@@ -1,7 +1,7 @@
 const form = document.querySelector('form')
 const inputMessage = document.querySelector('input')
 const ulMessages = document.querySelector('#ulMessages') // Agregué el selector correcto para ulMessages
-
+let currentUser;
 // @ts-ignore
 Swal.fire({
   title: "Welcome to the chat section. Please fill your username:",
@@ -11,10 +11,16 @@ Swal.fire({
   allowOutsideClick: false
 }).then((result) => {
   if (result.isConfirmed) {
+    currentUser = result.value;
     startChat(result.value)
     inputMessage?.focus()
   }
 })
+
+function formatTimestamp(timestamp) {
+  const date = new Date(timestamp);
+  return date.toLocaleString(); // Puedes personalizar el formato según tus preferencias
+}
 
 function startChat(user) {
   // @ts-ignore
@@ -56,12 +62,11 @@ function startChat(user) {
   })
 
   socket.on('messages', messages => {
-    // @ts-ignore
-    ulMessages.innerHTML = ''
+    ulMessages.innerHTML = '';
     messages.forEach(({ timestamp, user, text }) => {
-      const li = document.createElement('li')
-      li.innerHTML = `(${new Date(timestamp).toLocaleTimeString()}) ${user}: ${text}`
-      ulMessages?.appendChild(li)
-    })
-  })
+      const li = document.createElement('li');
+      li.innerHTML = `${user}: ${text} (${formatTimestamp(timestamp)})`;
+      ulMessages?.appendChild(li);
+    });
+  });
 }

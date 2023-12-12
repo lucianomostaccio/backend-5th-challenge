@@ -23,4 +23,4 @@ class MessagesManager {
 
 const messagesManager = new MessagesManager();
 
-module.exports = { MessagesManager, messagesManager };
+module.exports = messagesManager;
