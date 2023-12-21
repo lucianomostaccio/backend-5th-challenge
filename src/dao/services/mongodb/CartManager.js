@@ -27,13 +27,11 @@ class CartManager {
   // Agregar cart a la base de datos
   async addCart(cartData) {
     const newCart = new CartModel({
-      id: this.nextId,
       products: [],
     });
 
     try {
       await newCart.save();
-      this.nextId++; // Incrementar el ID para el próximo cart
       console.log("Cart agregado:", newCart);
     } catch (err) {
       console.error("Error al agregar el cart en la base de datos:", err);
@@ -51,9 +49,9 @@ class CartManager {
   }
 
   // Obtener cart por ID
-  async getCartById(id) {
+  async getCartById(_id) {
     try {
-      return await CartModel.findById(id);
+      return await CartModel.findById(_id);
     } catch (err) {
       console.error("Error al obtener el cart desde la base de datos:", err);
       return null;
@@ -67,7 +65,7 @@ class CartManager {
 
       if (cartToUpdate) {
         const productIndex = cartToUpdate.products.findIndex(
-          (product) => product.id === productId
+          (product) => product._id === productId
         );
 
         if (productIndex !== -1) {
@@ -76,7 +74,7 @@ class CartManager {
         } else {
           // Si el producto no está en el carrito (es nuevo), se agrega con cantidad inicial=1
           cartToUpdate.products.push({
-            id: productId,
+            _id: productId,
             quantity: 1,
           });
         }

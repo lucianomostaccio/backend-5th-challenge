@@ -1,5 +1,5 @@
 const mongoose = require("mongoose");
-const messagesCollection = "messages";
+// const messagesCollection = "messages";
 
 const messagesSchema = new mongoose.Schema(
   {
