@@ -3,7 +3,7 @@ const router = express.Router();
 const ProductManager = require("../dao/services/mongodb/ProductManager");
 const productManager = new ProductManager();
 
-// Rutas para manejo de productos
+// paths para manejo de productos
 
 // Obtener todos los productos
 router.get("/", async (req, res) => {

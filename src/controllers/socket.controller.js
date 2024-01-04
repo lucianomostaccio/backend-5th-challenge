@@ -5,12 +5,14 @@ const productManager = new ProductManager();
 
 function onConnection(webSocketServer) {
   return async function (socket) {
-    console.log(`New client connected: ${socket.id}`);
-    // socket.broadcast.emit("newUser", socket.handshake.auth.usuario);
+    console.log(socket.handshake.auth.usuario + ' se conectó')
+    socket.broadcast.emit(
+      'newUser',
+      socket.handshake.auth.usuario)
 
-    // Emit messages history log when a new client connects
-    const chatHistory = await messagesManager.findAll();
-    socket.emit("chatHistory", chatHistory);
+    socket.emit(
+      'messages',
+      await messagesManager.findAll())
 
     // Listen to client's events
     socket.on("newProduct", async (productData) => {
@@ -37,14 +39,19 @@ function onConnection(webSocketServer) {
       try {
         const newMessage = await messagesManager.create(messageData);
         webSocketServer.emit("newMessage", newMessage);
+        socketServer.emit(
+          'messages',
+          await messagesManager.findAll())
       } catch (error) {
-        console.error("Error adding the message in real time:", error);
+        console.error("Error adding the messages in real time:", error);
       }
     });
 
-    socket.on("disconnect", () => {
-      console.log(`Client ${socket.id} has disconnected from the server`);
-    });
+    socket.on('disconnecting', () => {
+      socket.broadcast.emit(
+        'userDisconnected',
+        socket.handshake.auth.usuario)
+    })
   };
 }
 

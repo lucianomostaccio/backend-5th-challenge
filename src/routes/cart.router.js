@@ -4,7 +4,7 @@ const CartManager = require("../dao/services/mongodb/CartManager");
 
 const cartManager = new CartManager();
 
-// Rutas para manejo de carts
+// paths para manejo de carts
 
 // Agregar un nuevo cart
 router.post("/", async (req, res) => {

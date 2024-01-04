@@ -1,8 +1,8 @@
 const express = require("express");
 const router = express.Router();
-const ProductManager = require("../dao/services/mongodb/ProductManager");
+const ProductManager = require("../dao/services/fs/ProductManager");
 const productManager = new ProductManager();
-const messagesManager = require("../dao/services/mongodb/MessagesManager");
+const messagesManager = require("../dao/services/fs/MessagesManager");
 
 const viewsRouter = router;
 
